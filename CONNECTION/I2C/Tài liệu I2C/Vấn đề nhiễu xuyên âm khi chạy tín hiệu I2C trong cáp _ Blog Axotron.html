@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/ -->
+<html lang="vi" class="translated-ltr"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width">
+	<title>Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp |  Blog Axotron</title>
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://axotron.se/blog/xmlrpc.php">
+	<!--[if lt IE 9]>
+	<script src="https://axotron.se/blog/wp-content/themes/twentythirteen/js/html5.js?ver=3.7.0"></script>
+	<![endif]-->
+	<meta name="robots" content="max-image-preview:large">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link href="https://fonts.gstatic.com/" crossorigin="" rel="preconnect">
+<link rel="alternate" type="application/rss+xml" title="Blog Axotron » Nguồn cấp dữ liệu" href="https://axotron.se/blog/feed/">
+<link rel="alternate" type="application/rss+xml" title="Axotron Blog » Comments Feed" href="https://axotron.se/blog/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Axotron Blog » Crosstalk Problems when Running I2C Signals in a Cable Comments Feed" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/feed/">
+<script>
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/axotron.se\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.2.2"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){p.clearRect(0,0,i.width,i.height),p.fillText(e,0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(t,0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s("\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!s("\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!s("\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!s("\ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udfff","\ud83e\udef1\ud83c\udffb\u200b\ud83e\udef2\ud83c\udfff")}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script><script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/wp-emoji-release.min.js.tải xuống" type="text/javascript" defer=""></script>
+<style>
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/style.min.css" media="all">
+<style id="wp-block-library-theme-inline-css">
+.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video{margin:0 0 1em}.wp-block-template-part.has-background{margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
+</style>
+<link rel="stylesheet" id="classic-theme-styles-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/classic-themes.min.css" media="all">
+<style id="global-styles-inline-css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #fff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--dark-gray: #141412;--wp--preset--color--red: #bc360a;--wp--preset--color--medium-orange: #db572f;--wp--preset--color--light-orange: #ea9629;--wp--preset--color--yellow: #fbca3c;--wp--preset--color--dark-brown: #220e10;--wp--preset--color--medium-brown: #722d19;--wp--preset--color--light-brown: #eadaa6;--wp--preset--color--beige: #e8e5ce;--wp--preset--color--off-white: #f7f5e7;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="collapscore-css-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/core_style.css" media="all">
+<link rel="stylesheet" id="collapseomatic-css-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/light_style.css" media="all">
+<link rel="stylesheet" id="parent-style-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/style.css" media="all">
+<link rel="stylesheet" id="child-style-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/style(1).css" media="all">
+<link rel="stylesheet" id="twentythirteen-fonts-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/css" media="all">
+<link rel="stylesheet" id="genericons-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/genericons.css" media="all">
+<link rel="stylesheet" id="twentythirteen-style-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/style(2).css" media="all">
+<link rel="stylesheet" id="twentythirteen-block-style-css" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/blocks.css" media="all">
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentythirteen-ie-css' href='https://axotron.se/blog/wp-content/themes/twentythirteen/css/ie.css?ver=20150214' media='all' />
+<![endif]-->
+<script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/jquery.min.js.tải xuống" id="jquery-core-js"></script>
+<script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/jquery-migrate.min.js.tải xuống" id="jquery-migrate-js"></script>
+<link rel="https://api.w.org/" href="https://axotron.se/blog/wp-json/"><link rel="alternate" type="application/json" href="https://axotron.se/blog/wp-json/wp/v2/posts/774"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://axotron.se/blog/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://axotron.se/blog/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.2.2">
+<link rel="canonical" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/">
+<link rel="shortlink" href="https://axotron.se/blog/?p=774">
+<link rel="alternate" type="application/json+oembed" href="https://axotron.se/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Faxotron.se%2Fblog%2Fcrosstalk-problems-when-running-i2c-signals-in-a-cable%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://axotron.se/blog/wp-json/oembed/1.0/embed?url=https%3A%2F%2Faxotron.se%2Fblog%2Fcrosstalk-problems-when-running-i2c-signals-in-a-cable%2F&amp;format=xml">
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>	<style type="text/css" id="twentythirteen-header-css">
+		.site-header {
+		background: url(https://axotron.se/blog/wp-content/uploads/2015/07/cropped-cropped-Axotron_bg_1600.jpg) no-repeat scroll top;
+		background-size: 1600px auto;
+	}
+	@media (max-width: 767px) {
+		.site-header {
+			background-size: 768px auto;
+		}
+	}
+	@media (max-width: 359px) {
+		.site-header {
+			background-size: 360px auto;
+		}
+	}
+			</style>
+	<link rel="icon" href="https://axotron.se/blog/wp-content/uploads/2016/01/cropped-logga_A_big_1024-1-32x32.png" sizes="32x32">
+<link rel="icon" href="https://axotron.se/blog/wp-content/uploads/2016/01/cropped-logga_A_big_1024-1-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://axotron.se/blog/wp-content/uploads/2016/01/cropped-logga_A_big_1024-1-180x180.png">
+<meta name="msapplication-TileImage" content="https://axotron.se/blog/wp-content/uploads/2016/01/cropped-logga_A_big_1024-1-270x270.png">
+<style>.--savior-overlay-transform-reset {
+  transform: none !important;
+}
+.--savior-overlay-z-index-top {
+  z-index: 2147483643 !important;
+}
+.--savior-overlay-position-relative {
+  position: relative;
+}
+.--savior-overlay-overflow-hidden {
+  overflow: hidden !important;
+}
+.--savior-overlay-overflow-x-visible {
+  overflow-x: visible !important;
+}
+.--savior-overlay-overflow-y-visible {
+  overflow-y: visible !important;
+}
+.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+.--savior-overlay-display-none {
+  display: none !important;
+}
+.--savior-overlay-clearfix {
+  clear: both;
+}
+.--savior-overlay-reset-filter {
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+.--savior-tooltip-host {
+  z-index: 9999;
+  position: absolute;
+  top: 0;
+}
+/*Override css styles for Twitch.tv*/
+main.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+main.--savior-overlay-z-index-top {
+  z-index: auto !important;
+}
+main.--savior-overlay-z-index-top .channel-root__player-container + div,
+main.--savior-overlay-z-index-top .video-player-hosting-ui__container + div {
+  opacity: 0.1;
+}
+/*Dirty hack for facebook big video page e.g: https://www.facebook.com/abc/videos/...*/
+.--savior-backdrop {
+  position: fixed !important;
+  z-index: 2147483642 !important;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw !important;
+  background-color: rgba(0,0,0,0.9);
+}
+.--savior-overlay-twitter-video-player {
+  position: fixed;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+}
+/* Fix conflict css with zingmp3 */
+.zm-video-modal.--savior-overlay-z-index-reset {
+  position: absolute;
+}
+/* Dirty hack for xvideos99 */
+#page #main.--savior-overlay-z-index-reset {
+  z-index: auto !important;
+}
+/* Overlay for ok.ru */
+#vp_w.--savior-overlay-z-index-reset.media-layer.media-layer__video {
+  position: absolute;
+  overflow-y: hidden;
+}
+/* Fix missing controller for tv.naver.com */
+.--savior-overlay-z-index-top.rmc_controller,
+.--savior-overlay-z-index-top.rmc_setting_intro,
+.--savior-overlay-z-index-top.rmc_highlight,
+.--savior-overlay-z-index-top.rmc_control_settings {
+  z-index: 2147483644 !important;
+}
+/* Dirty hack for douyi.com */
+.swiper-wrapper.--savior-overlay-z-index-reset .swiper-slide:not(.swiper-slide-active),
+.swiper-wrapper.--savior-overlay-transform-reset .swiper-slide:not(.swiper-slide-active) {
+  display: none;
+}
+.videoWrap + div > div {
+  pointer-events: unset;
+}
+/* Dirty hack for fpt.ai */
+.mfp-wrap.--savior-overlay-z-index-top {
+  position: relative;
+}
+.mfp-wrap.--savior-overlay-z-index-top .mfp-close {
+  display: none;
+}
+.mfp-wrap.--savior-overlay-z-index-top .mfp-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+section.--savior-overlay-z-index-reset>main[role="main"].--savior-overlay-z-index-reset + nav {
+  z-index: -1 !important;
+}
+section.--savior-overlay-z-index-reset>main[role="main"].--savior-overlay-z-index-reset section.--savior-overlay-z-index-reset div.--savior-overlay-z-index-reset ~ div {
+  position: relative;
+}
+div[class^="tiktok"].--savior-overlay-z-index-reset {
+  z-index: 2147483644 !important;
+}
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/m=el_main_css"></head>
+
+<body class="post-template-default single single-post postid-774 single-format-standard wp-embed-responsive single-author sidebar">
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tableValues="0 0.49803921568627"></fefuncr><fefuncg type="table" tableValues="0 0.49803921568627"></fefuncg><fefuncb type="table" tableValues="0 0.49803921568627"></fefuncb><fefunca type="table" tableValues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tableValues="0 1"></fefuncr><fefuncg type="table" tableValues="0 1"></fefuncg><fefuncb type="table" tableValues="0 1"></fefuncb><fefunca type="table" tableValues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tableValues="0.54901960784314 0.98823529411765"></fefuncr><fefuncg type="table" tableValues="0 1"></fefuncg><fefuncb type="table" tableValues="0.71764705882353 0.25490196078431"></fefuncb><fefunca type="table" tableValues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tableValues="0 1"></fefuncr><fefuncg type="table" tableValues="0 0.27843137254902"></fefuncg><fefuncb type="table" tableValues="0.5921568627451 0.27843137254902"></fefuncb><fefunca type="table" tableValues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tableValues="0 0"></fefuncr><fefuncg type="table" tableValues="0 0.64705882352941"></fefuncg><fefuncb type="table" tableValues="0 1"></fefuncb><fefunca type="table" tableValues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tableValues="0.78039215686275 1"></fefuncr><fefuncg type="table" tableValues="0 0.94901960784314"></fefuncg><fefuncb type="table" tableValues="0.35294117647059 0.47058823529412"></fefuncb><fefunca type="table" tableValues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tableValues="0.65098039215686 0.40392156862745"></fefuncr><fefuncg type="table" tableValues="0 1"></fefuncg><fefuncb type="table" tableValues="0.44705882352941 0.4"></fefuncb><fefunca type="table" tableValues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tableValues="0.098039215686275 1"></fefuncr><fefuncg type="table" tableValues="0 0.66274509803922"></fefuncg><fefuncb type="table" tableValues="0.84705882352941 0.41960784313725"></fefuncb><fefunca type="table" tableValues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg>	<div id="page" class="hfeed site">
+		<header id="masthead" class="site-header" role="banner">
+			<a class="home-link" href="https://axotron.se/blog/" title="Blog Axotron" rel="home">
+				<h1 class="site-title">Axotron Blog</h1>
+				<h2 class="site-description">Electronics and other subjects I happen to write about</h2>
+			</a>
+
+			<div id="navbar" class="navbar">
+				<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+					<button class="menu-toggle">Menu</button>
+					<a class="screen-reader-text skip-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#content" title="Chuyển đến nội dung">Skip to content</a>
+					<div id="primary-menu" class="nav-menu"><ul>
+<li class="page_item page-item-2"><a href="https://axotron.se/blog/about/">About</a></li>
+<li class="page_item page-item-31"><a href="https://axotron.se/blog/axotron/">Axotron</a></li>
+<li class="page_item page-item-293"><a href="https://axotron.se/blog/blog-post-index/">Blog post index</a></li>
+</ul></div>
+					<form role="search" method="get" class="search-form" action="https://axotron.se/blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Tìm kiếm …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form>				</nav><!-- #site-navigation -->
+			</div><!-- #navbar -->
+		</header><!-- #masthead -->
+
+		<div id="main" class="site-main">
+
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+
+			
+				
+<article id="post-774" class="post-774 post type-post status-publish format-standard hentry category-electronics">
+	<header class="entry-header">
+		
+				<h1 class="entry-title">Crosstalk Problems when Running I2C Signals in a Cable</h1>
+		
+		<div class="entry-meta">
+			<span class="date"><a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/" title="Permalink to Crosstalk Sự cố khi Chạy Tín hiệu I2C trong Cáp" rel="bookmark"><time class="entry-date" datetime="2016-01-10T22:01:21+01:00">2016-01-10</time></a></span><span class="categories-links"><a href="https://axotron.se/blog/category/electronics/" rel="category tag">Electronics</a></span><span class="author vcard"><a class="url fn n" href="https://axotron.se/blog/author/per-magnusson/" title="View all posts by Per Magnusson" rel="author">Per Magnusson</a></span>					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>An I2C bus (or SMBus) can fail to work for various reasons. A well known reason is that there may be too much capacitance on the bus causing too slow low-to-high transitions. 400 pF is the maximum bus capacitance according to <a href="http://www.nxp.com/documents/user_manual/UM10204.pdf" target="_blank">the I2C specification</a>, but this is not necessarily a hard limit in practice. The problem of excessive capacitance can often be remedied by lowering the data rate, decreasing the value of the pull-up resistors or somehow reducing the bus capacitance by changed routing, shortened cables or using a different kind of cable.</p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tuy nhiên, bài viết này mô tả một vấn đề khác và có lẽ ít rõ ràng hơn có thể xảy ra khi chạy bus I2C trong cáp, đó là nhiễu xuyên âm và phải làm gì nếu nó trở thành sự cố.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Đây là ảnh chụp mặt cắt ngang của cáp điện thoại đơn giản được sử dụng trong các thí nghiệm trong bài viết này. </font><font style="vertical-align: inherit;">Các nhãn hiển thị việc gán tín hiệu ban đầu được sử dụng để cung cấp cả nguồn và bus I2C cho cảm biến nhiệt độ.</font></font></p>
+<figure id="attachment_795" aria-describedby="caption-attachment-795" style="width: 800px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/cable_cross_section-adjacent.jpg" rel="attachment wp-att-795"><img decoding="async" class="size-full wp-image-795" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/cable_cross_section-adjacent.jpg" alt="Mặt cắt ngang của cáp có gán tín hiệu ban đầu." width="800" height="533" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/cable_cross_section-adjacent.jpg 800w, https://axotron.se/blog/wp-content/uploads/2016/01/cable_cross_section-adjacent-300x200.jpg 300w, https://axotron.se/blog/wp-content/uploads/2016/01/cable_cross_section-adjacent-768x512.jpg 768w" sizes="(max-width: 800px) 100vw, 800px"></a><figcaption id="caption-attachment-795" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mặt cắt ngang của cáp có gán tín hiệu ban đầu.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4,7 kohm được sử dụng làm điện trở kéo lên. </font><font style="vertical-align: inherit;">Dưới đây là sơ đồ phạm vi của các tín hiệu thu được khi sử dụng 70 cm cáp và tốc độ dữ liệu xấp xỉ 200 kHz.</font></font></p>
+<figure id="attachment_779" aria-describedby="caption-attachment-779" style="width: 320px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-4k7-adjacent-cable_arrows.png" rel="attachment wp-att-776"><img decoding="async" loading="lazy" class="wp-image-779 size-full" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-4k7-adjacent-cable_arrows.png" alt="" width="320" height="234" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/I2C-4k7-adjacent-cable_arrows.png 320w, https://axotron.se/blog/wp-content/uploads/2016/01/I2C-4k7-adjacent-cable_arrows-300x219.png 300w" sizes="(max-width: 320px) 100vw, 320px"></a><figcaption id="caption-attachment-779" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crosstalk giữa các tín hiệu I2C. </font><font style="vertical-align: inherit;">70 cm cáp, tín hiệu trên dây liền kề, kéo lên 4,7 kohm. </font><font style="vertical-align: inherit;">Tín hiệu màu vàng là SCL và màu xanh là SDA. </font><font style="vertical-align: inherit;">Mũi tên đỏ hiển thị các sự kiện nhiễu xuyên âm.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Các mũi tên màu đỏ cho biết nơi một tín hiệu bị nhiễu do sự chuyển đổi nhanh từ mức cao xuống mức thấp trên tín hiệu kia. </font><font style="vertical-align: inherit;">Mũi tên màu xanh lá cây cho thấy rằng không có nhiễu loạn nào có thể được nhìn thấy trên SCL khi SCL ở mức thấp, mặc dù có sự chuyển đổi nhanh chóng từ mức cao xuống mức thấp trên SDA. </font><font style="vertical-align: inherit;">Lý do tín hiệu chỉ bị nhiễu khi ở mức cao là do ở trạng thái cao, chỉ có một điện trở kéo lên tương đối yếu giữ tín hiệu ở mức phù hợp, do đó một lượng nhỏ dòng điện đưa vào tín hiệu có thể thay đổi. điện áp khá một chút. </font><font style="vertical-align: inherit;">Khi tín hiệu I2C ở mức thấp, nó được giữ ở mức thấp bởi một bóng bán dẫn mạnh có điện trở chỉ vài chục ôm, do đó, nó sẽ yêu cầu dòng điện mạnh hơn hai bậc để gây ra nhiễu có cùng biên độ trên tín hiệu I2C thấp so với tín hiệu ở trạng thái cao.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nếu các trục trặc tiêu cực do nhiễu xuyên âm gây ra trở nên đủ lớn, chúng có thể khiến xe buýt bị lỗi theo nhiều cách khác nhau do các tín hiệu bị hiểu sai, vì vậy điều quan trọng là phải kiểm soát chúng. </font><font style="vertical-align: inherit;">Đặc tả I2C xác định các mức logic cao hợp lệ là ít nhất 70% VDD. </font><font style="vertical-align: inherit;">70% của 3,3 V là 2,31 V và các trục trặc trong cốt truyện ở trên giảm xuống mức này, điều này thật tệ.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">cơ chế khớp nối</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cơ chế ghép nối từ tín hiệu gây nhiễu (kẻ xâm lược) sang tín hiệu bị nhiễu (nạn nhân) là điện dung giữa các dây trong cáp. </font><font style="vertical-align: inherit;">Một mô hình sơ đồ của bus I2C và cáp (được vẽ bằng LTspice) được hiển thị bên dưới.</font></font></p>
+<figure id="attachment_782" aria-describedby="caption-attachment-782" style="width: 537px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/sch_adjacent_cable.png" rel="attachment wp-att-782"><img decoding="async" loading="lazy" class="size-full wp-image-782" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/sch_adjacent_cable.png" alt="Mô hình cáp có tín hiệu I2C trên các dây liền kề." width="537" height="274" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/sch_adjacent_cable.png 537w, https://axotron.se/blog/wp-content/uploads/2016/01/sch_adjacent_cable-300x153.png 300w" sizes="(max-width: 537px) 100vw, 537px"></a><figcaption id="caption-attachment-782" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mô hình cáp có tín hiệu I2C trên các dây liền kề.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">R1 và R2 là các điện trở kéo lên I2C. </font><font style="vertical-align: inherit;">C1-C4 là điện dung giữa các dây liền kề trong cáp trong khi C5 và C6 là điện dung giữa các dây chéo. </font><font style="vertical-align: inherit;">C7 và C8 là điện dung phân tán trên PCB cũng như điện dung tại các chân của IC. </font><font style="vertical-align: inherit;">S1 là một công tắc mô hình hóa đầu ra mở của chốt dẫn động trong khi V1 điều khiển khi nào công tắc đóng và khi nào công tắc mở. </font><font style="vertical-align: inherit;">Giá trị của một số thành phần được đặt làm tham số (trong dấu ngoặc nhọn) để dễ dàng sửa đổi chúng và điều chỉnh chúng cho phù hợp với giá trị thực của một phiên bản cụ thể của mạch. </font><font style="vertical-align: inherit;">Các điện dung thể hiện trong sơ đồ là đại diện hợp lý của mạch thực được thảo luận ở trên.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dưới đây là các dạng sóng mô phỏng của tín hiệu SCL và SDA khi các điện trở kéo lên I2C được tăng dần từ 1k qua 2k2 và 4k7 đến 10kohms.</font></font></p>
+<figure id="attachment_784" aria-describedby="caption-attachment-784" style="width: 608px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/wave_adjacent_cable-1.png" rel="attachment wp-att-783"><img decoding="async" loading="lazy" class="wp-image-784 size-full" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/wave_adjacent_cable-1.png" alt="" width="608" height="288" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/wave_adjacent_cable-1.png 608w, https://axotron.se/blog/wp-content/uploads/2016/01/wave_adjacent_cable-1-300x142.png 300w" sizes="(max-width: 608px) 100vw, 608px"></a><figcaption id="caption-attachment-784" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dạng sóng mô phỏng cho mạch trên. </font><font style="vertical-align: inherit;">Giá trị điện trở kéo lên được chuyển qua các giá trị 1k, 2k2, 4k7 và 10k. </font><font style="vertical-align: inherit;">Điện trở càng nhỏ, các cạnh càng dốc.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Người ta có thể lưu ý rằng biên độ của các trục trặc và độ dốc của các cạnh khớp với phép đo khá tốt đối với điện trở kéo lên 4k7 (dấu vết chậm nhất tiếp theo). </font><font style="vertical-align: inherit;">Điều này chứng tỏ rằng mô hình khá chính xác.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chúng ta có thể thấy rằng trục trặc ban đầu trong dạng sóng SDA có (gần như) cùng một biên độ bất kể giá trị của các điện trở kéo lên. </font><font style="vertical-align: inherit;">Điều này có thể không được mong đợi, nhưng là hệ quả của thực tế là phần đầu tiên của bước bị chi phối bởi sự phân chia điện áp điện dung trong mạch. </font><font style="vertical-align: inherit;">Bộ chia điện dung bao gồm C1 sẽ bơm điện tích vào tổ hợp song song của C4, C5 và C7. </font><font style="vertical-align: inherit;">Ngay sau bước này, điện áp trên các tụ điện bắt đầu phục hồi và điều này xảy ra nhanh như thế nào được xác định bởi giá trị của điện trở kéo lên, vì vậy điện trở 1k cho khả năng phục hồi nhanh gấp 10 lần so với điện trở 10k. </font><font style="vertical-align: inherit;">Nhưng lưu ý rằng nó không làm giảm đáng kể mức độ trục trặc.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ngoài ra còn có một chút nhiễu xuyên âm xảy ra trong cạnh tích cực chậm hơn của kẻ xâm lược. </font><font style="vertical-align: inherit;">Nhiễu xuyên âm này ít gây ra vấn đề hơn vì nó có biên độ dương và do đó hoặc làm tăng biên độ dương sẵn có của tín hiệu nạn nhân hoặc không ảnh hưởng đến tín hiệu nạn nhân thấp vì tín hiệu đó đang được kéo xuống thấp và do đó hầu như không bị nhiễu.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Giảm lực cản kéo lên</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Giá trị thấp hơn của các điện trở kéo lên dường như không hoạt động tốt theo mô phỏng, nhưng dù sao chúng ta hãy xác minh điều này trong thực tế. </font><font style="vertical-align: inherit;">Dưới đây là phép đo tương tự như trước, nhưng với điện trở kéo lên 2,2 kohm.</font></font></p>
+<figure id="attachment_785" aria-describedby="caption-attachment-785" style="width: 320px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-2k2-adjacent-cable.png" rel="attachment wp-att-785"><img decoding="async" loading="lazy" class="wp-image-785 size-full" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-2k2-adjacent-cable.png" alt="Crosstalk giữa các tín hiệu I2C.  70cm dây.  Tín hiệu trên dây liền kề.  Kéo lên 2,2 kohm.  Tín hiệu màu vàng là SCL và màu xanh là SDA." width="320" height="234" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/I2C-2k2-adjacent-cable.png 320w, https://axotron.se/blog/wp-content/uploads/2016/01/I2C-2k2-adjacent-cable-300x219.png 300w" sizes="(max-width: 320px) 100vw, 320px"></a><figcaption id="caption-attachment-785" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crosstalk giữa các tín hiệu I2C. </font><font style="vertical-align: inherit;">70 cm cáp, tín hiệu trên các dây liền kề, kéo lên 2,2 kohm. </font><font style="vertical-align: inherit;">Tín hiệu màu vàng là SCL và màu xanh là SDA.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Theo dự đoán của mô phỏng, biên độ của các trục trặc vẫn giữ nguyên, trong khi các cạnh dương trở nên dốc hơn.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cấu hình cáp đã sửa đổi</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vì vậy, chúng tôi không thể giảm biên độ của nhiễu xuyên âm bằng thủ thuật tiêu chuẩn cũ là giảm điện trở kéo lên. </font><font style="vertical-align: inherit;">Vì vậy, có cái gì khác mà chúng ta có thể thử?</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vì cơ chế khớp nối là điện dung nên chúng tôi muốn giảm điện dung giữa kẻ gây hấn và nạn nhân. </font><font style="vertical-align: inherit;">Điều này thực sự có thể được thực hiện mà không cần thay đổi cáp nếu chúng ta thay đổi dây nào được sử dụng cho tín hiệu nào. </font><font style="vertical-align: inherit;">Để làm điều này, các tín hiệu I2C được đặt trên đường chéo thay vì các dây liền kề như sau:</font></font></p>
+<figure id="attachment_796" aria-describedby="caption-attachment-796" style="width: 800px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/cable_cross_section_diagonal.jpg" rel="attachment wp-att-796"><img decoding="async" loading="lazy" class="size-full wp-image-796" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/cable_cross_section_diagonal.jpg" alt="Mặt cắt ngang của cáp với khả năng gán tín hiệu được cải thiện." width="800" height="533" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/cable_cross_section_diagonal.jpg 800w, https://axotron.se/blog/wp-content/uploads/2016/01/cable_cross_section_diagonal-300x200.jpg 300w, https://axotron.se/blog/wp-content/uploads/2016/01/cable_cross_section_diagonal-768x512.jpg 768w" sizes="(max-width: 800px) 100vw, 800px"></a><figcaption id="caption-attachment-796" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mặt cắt ngang của cáp với khả năng gán tín hiệu được cải thiện.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(Nếu thay vào đó, nó là cáp ruy băng bốn dây, thì cách tốt nhất là đặt tín hiệu I2C trên dây bên ngoài và nguồn và GND trên hai dây bên trong. Trong cáp xoắn đôi, tín hiệu I2C phải được xoắn bằng power hoặc GND và hoàn toàn không phải với nhau.)</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nhiễu xuyên âm kết quả được hiển thị trong các biểu đồ bên dưới cho các lần kéo lên 4,7k và 2,2k.</font></font></p>
+<figure id="attachment_786" aria-describedby="caption-attachment-786" style="width: 320px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-4k7-diagonal-cable.png" rel="attachment wp-att-786"><img decoding="async" loading="lazy" class="wp-image-786 size-full" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-4k7-diagonal-cable.png" alt="Cáp chéo I2C 4k7" width="320" height="234" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/I2C-4k7-diagonal-cable.png 320w, https://axotron.se/blog/wp-content/uploads/2016/01/I2C-4k7-diagonal-cable-300x219.png 300w" sizes="(max-width: 320px) 100vw, 320px"></a><figcaption id="caption-attachment-786" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crosstalk giữa các tín hiệu I2C. </font><font style="vertical-align: inherit;">70 cm cáp, tín hiệu trên dây chéo, kéo lên 4,7 kohm. </font><font style="vertical-align: inherit;">Tín hiệu màu vàng là SCL và màu xanh là SDA.</font></font></figcaption></figure>
+<figure id="attachment_787" aria-describedby="caption-attachment-787" style="width: 320px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-2k2-diagonal-cable.png" rel="attachment wp-att-787"><img decoding="async" loading="lazy" class="wp-image-787 size-full" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-2k2-diagonal-cable.png" alt="Crosstalk giữa các tín hiệu I2C.  70cm dây.  Tín hiệu trên dây liền kề.  Kéo lên 2,2 kohm.  Tín hiệu màu vàng là SCL và màu xanh là SDA." width="320" height="234" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/I2C-2k2-diagonal-cable.png 320w, https://axotron.se/blog/wp-content/uploads/2016/01/I2C-2k2-diagonal-cable-300x219.png 300w" sizes="(max-width: 320px) 100vw, 320px"></a><figcaption id="caption-attachment-787" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crosstalk giữa các tín hiệu I2C. </font><font style="vertical-align: inherit;">70 cm cáp, tín hiệu trên dây chéo, kéo lên 2,2 kohm. </font><font style="vertical-align: inherit;">Tín hiệu màu vàng là SCL và màu xanh là SDA.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Có thể thấy, các trục trặc đã giảm đáng kể và giờ đây trở nên vô hại. </font><font style="vertical-align: inherit;">Điều này cũng có thể được mô phỏng bằng cách thay đổi sơ đồ mô phỏng một chút để di chuyển kẻ tấn công theo đường chéo từ nạn nhân:</font></font></p>
+<figure id="attachment_789" aria-describedby="caption-attachment-789" style="width: 537px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/sch_diagonal_cable.png" rel="attachment wp-att-789"><img decoding="async" loading="lazy" class="wp-image-789 size-full" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/sch_diagonal_cable.png" alt="sch_diagonal_cable" width="537" height="274" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/sch_diagonal_cable.png 537w, https://axotron.se/blog/wp-content/uploads/2016/01/sch_diagonal_cable-300x153.png 300w" sizes="(max-width: 537px) 100vw, 537px"></a><figcaption id="caption-attachment-789" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mô hình cáp có tín hiệu I2C trên dây chéo.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Các dạng sóng kết quả được hiển thị dưới đây.</font></font></p>
+<figure id="attachment_790" aria-describedby="caption-attachment-790" style="width: 608px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/wave_diagonal_cable.png" rel="attachment wp-att-790"><img decoding="async" loading="lazy" class="wp-image-790 size-full" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/wave_diagonal_cable.png" alt="wave_diagonal_cable" width="608" height="286" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/wave_diagonal_cable.png 608w, https://axotron.se/blog/wp-content/uploads/2016/01/wave_diagonal_cable-300x141.png 300w" sizes="(max-width: 608px) 100vw, 608px"></a><figcaption id="caption-attachment-790" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dạng sóng mô phỏng cho mạch có tín hiệu I2C theo đường chéo trong cáp. </font><font style="vertical-align: inherit;">Giá trị điện trở kéo lên được chuyển qua các giá trị 1k, 2k2, 4k7 và 10k. </font><font style="vertical-align: inherit;">Điện trở càng nhỏ, các cạnh càng dốc.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mô phỏng cũng phù hợp với phép đo trong trường hợp này.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vì vậy, phương pháp đặt các tín hiệu I2C cách xa nhau trong cáp dường như có hiệu quả, đúng như mong đợi.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Một khả năng ít tao nhã hơn là thêm nhiều điện dung hơn giữa tín hiệu I2C và GND, miễn là điện dung của bus không quá lớn. </font><font style="vertical-align: inherit;">Điều này sẽ ảnh hưởng tích cực đến việc phân chia điện áp điện dung và giảm nhiễu xuyên âm bằng cách tăng điện dung từ nạn nhân lên GND thay vì giảm điện dung giữa kẻ gây hấn và nạn nhân. </font><font style="vertical-align: inherit;">Việc chỉ định lại cáp ở trên thực sự vừa làm giảm điện dung của kẻ xâm lược-nạn nhân cũng như tăng điện dung giữa nạn nhân với GND (và nguồn), vì vậy nó sử dụng cả hai cơ chế.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chiều dài cáp ảnh hưởng</font></font></h3>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Một câu hỏi khác là chiều dài của cáp ảnh hưởng đến nhiễu xuyên âm như thế nào. </font><font style="vertical-align: inherit;">Bằng cách kiểm tra các mô hình sơ đồ của cáp, người ta có thể nhận ra rằng tất cả điện dung của cáp (C1-C6) tỷ lệ thuận với chiều dài của cáp. </font><font style="vertical-align: inherit;">Như đã đề cập ở trên, biên độ của nhiễu xuyên âm được điều khiển bởi sự phân chia điện áp theo kiểu điện dung. </font><font style="vertical-align: inherit;">Tất cả các điện dung liên quan đến việc phân chia, ngoại trừ các điện dung nhỏ bên ngoài tới GND (C7 và C8), tăng tuyến tính với chiều dài của cáp, miễn là điện dung của cáp chiếm ưu thế so với điện dung phân tán tới GND, chiều dài của cáp chỉ có tác động rất nhỏ đến biên độ của nhiễu xuyên âm.</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dưới đây là biểu đồ dao động ký của một bus I2C chạy qua 2,7 m cáp.</font></font></p>
+<figure id="attachment_791" aria-describedby="caption-attachment-791" style="width: 320px" class="wp-caption alignnone"><a href="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-2k2-diagonal-long-cable.png" rel="attachment wp-att-791"><img decoding="async" loading="lazy" class="wp-image-791 size-full" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/I2C-2k2-diagonal-long-cable.png" alt="Cáp dài chéo I2C 2k2" width="320" height="234" srcset="https://axotron.se/blog/wp-content/uploads/2016/01/I2C-2k2-diagonal-long-cable.png 320w, https://axotron.se/blog/wp-content/uploads/2016/01/I2C-2k2-diagonal-long-cable-300x219.png 300w" sizes="(max-width: 320px) 100vw, 320px"></a><figcaption id="caption-attachment-791" class="wp-caption-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Crosstalk giữa các tín hiệu I2C. </font><font style="vertical-align: inherit;">2,7 m cáp, tín hiệu trên dây chéo, kéo lên 2,2 kohm. </font><font style="vertical-align: inherit;">Tín hiệu màu vàng là SCL và màu xanh là SDA.</font></font></figcaption></figure>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Đúng như dự đoán, biên độ của nhiễu xuyên âm về cơ bản vẫn giữ nguyên trong khi các cạnh ít dốc hơn do có thêm điện dung.</font></font></p>
+<h3><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tóm tắt và khuyến nghị</font></font></h3>
+<ul>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">I2C đặc biệt nhạy cảm với nhiễu xuyên âm do tín hiệu thường không được điều khiển bởi các trình điều khiển mạnh mà thay vào đó là các điện trở kéo lên yếu.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Trục trặc do nhiễu xuyên âm có thể khiến bus I2C gặp trục trặc.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cáp thường có điện dung lớn giữa ít nhất một số dây.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Việc giảm giá trị của các điện trở kéo lên I2C không có bất kỳ tác động đáng kể nào đối với nhiễu xuyên âm và do đó không phải là cách hiệu quả để kiểm soát nó.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Các tín hiệu I2C nên được đặt trong một cáp sao cho chúng có điện dung càng ít càng tốt đối với các tín hiệu gây hấn, tức là đối với các tín hiệu có tốc độ chuyển đổi từ cao xuống thấp nhanh (như các tín hiệu I2C khác).</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Điện dung giữa dây I2C, nguồn và dây GND giúp giảm nhiễu xuyên âm (nhưng phải trả giá bằng điện dung bus cao hơn, do đó quá trình chuyển đổi chậm hơn và giảm tốc độ tối đa đối với một giá trị nhất định của điện trở kéo lên).</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Trong cáp xoắn đôi, tín hiệu I2C phải được ghép nối với dây nguồn hoặc dây GND, không phải với các tín hiệu I2C khác.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Trong cáp ruy băng, tín hiệu I2C chỉ nên tiếp giáp với dây nguồn hoặc dây GND.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chiều dài của cáp thường không ảnh hưởng nhiều đến biên độ của nhiễu xuyên âm. </font><font style="vertical-align: inherit;">(Miễn là cáp đủ dài để điện dung của cáp chiếm ưu thế so với các điện dung của bus khác.)</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tất nhiên, cáp dài hơn sẽ tăng thêm điện dung và do đó làm giảm độ dốc của các cạnh dương, điều này có thể làm giảm tốc độ tối đa và/hoặc yêu cầu giảm điện trở kéo lên.</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Bạn nên sử dụng máy hiện sóng để xem các tín hiệu I2C trong bất kỳ thiết kế mới nào để xem liệu chúng có đẹp hay cần được cải thiện hay không.</font></font></li>
+</ul>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tôi hy vọng bài viết này đã cung cấp một số trực giác về – và cái nhìn sâu sắc về – nhiễu xuyên âm I2C trong cáp và những việc cần làm để kiểm soát nó.</font></font></p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta">
+		
+			</footer><!-- .entry-meta -->
+</article><!-- #post -->
+						<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">bài chuyển hướng</font></font></h1>
+		<div class="nav-links">
+
+			<a href="https://axotron.se/blog/problems-with-python-xbee-2-2-3-package/" rel="prev"><span class="meta-nav"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">←</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> Sự cố với gói Python XBee 2.2.3</font></font></a>			<a href="https://axotron.se/blog/how-to-update-phpmyadm/" rel="next"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cách cập nhật phpMyAdmin (và WordPress) </font></font><span class="meta-nav"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">→</font></font></span></a>
+		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+						
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+			14 suy nghĩ về “ </font></font><span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Các vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ”		</font></font></h2>
+
+		<ol class="comment-list">
+					<li id="comment-1582" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-1582" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/7822f325f559ef18423ad60db61c21f5.png" srcset="https://secure.gravatar.com/avatar/7822f325f559ef18423ad60db61c21f5?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Markandey Maithani</font></font></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-1582"><time datetime="2016-06-17T09:09:49+01:00"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2016-06-17 lúc 09:09</font></font></time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nhưng có một vấn đề là khi chúng tôi gắn thêm số lượng nô lệ vào i2c, chỉ một số ít hoạt động bình thường. </font><font style="vertical-align: inherit;">Tôi đang sử dụng i2c và tôi có thể gửi dữ liệu trên 100 mét nhưng tôi đã đính kèm 40 nô lệ và vấn đề là chỉ có 7 nô lệ hoạt động sau khi chương trình đó bị kẹt và không có nô lệ nào khác hoạt động. </font><font style="vertical-align: inherit;">Bạn có thể giúp tôi không?</font></font></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=1582#respond" data-commentid="1582" data-postid="774" data-belowelement="div-comment-1582" data-respondelement="respond" data-replyto="Reply to Markandey Maithani" aria-label="Trả lời Markandey Maithani"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hồi đáp</font></font></a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-19974" class="comment odd alt depth-2">
+			<article id="div-comment-19974" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/a5bf434e3d2d3cb0ea26330c019c951d.png" srcset="https://secure.gravatar.com/avatar/a5bf434e3d2d3cb0ea26330c019c951d?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">rahul</font></font></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-19974"><time datetime="2019-06-27T16:22:15+01:00"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2019-06-27 lúc 16:22</font></font></time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">dùng nối dài cáp i2c p82b715</font></font></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=19974#respond" data-commentid="19974" data-postid="774" data-belowelement="div-comment-19974" data-respondelement="respond" data-replyto="Reply to rahul" aria-label="Trả lời rahul"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Hồi đáp</font></font></a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-1583" class="comment byuser comment-author-per-magnusson bypostauthor even thread-odd thread-alt depth-1">
+			<article id="div-comment-1583" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/d552bed30bd0159a254b0b1325f044c5.png" srcset="https://secure.gravatar.com/avatar/d552bed30bd0159a254b0b1325f044c5?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mỗi Magnusson</font></font></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-1583"><time datetime="2016-06-18T20:43:36+01:00"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2016-06-18 lúc 20:43</font></font></time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chào Markandey,</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Có vẻ như bạn có rất nhiều điện dung trên xe buýt I2C. </font><font style="vertical-align: inherit;">I2C không thực sự được sử dụng với hơn 400 pF trên mỗi tín hiệu và 100 m cáp có khả năng có nhiều điện dung hơn thế. </font><font style="vertical-align: inherit;">Bạn đã xem các dạng sóng bằng máy hiện sóng để xem chúng có bị suy giảm không?</font></font></p>
+<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Những cách có thể về phía trước là:</font></font></p>
+<p>– Use a cable with less capacitance. Maybe use a flat modular cable (like <a href="http://www.digikey.com/product-detail/en/assmann-wsw-components/AT-K-26-6-B-1000/A0062R-1000-ND/1972592" rel="nofollow ugc">http://www.digikey.com/product-detail/en/assmann-wsw-components/AT-K-26-6-B-1000/A0062R-1000-ND/1972592</a>) or a ribbon cable and use the respective outer wires on each side for SCL and SDA while leaving at least the next wire inside unconnected and then having a GND or VCC wire inside of that. E.g. SCL-NC-GND-VCC-NC-SDA (where NC is a non-connected wire). This reduces capacitance and crosstalk within the cable, but increases susceptibility to external EMI due to the wider separation of signals and return paths.</p>
+<p>– The high capacitance could perhaps be somewhat managed by reducing the values of the pull-up resistors.</p>
+<p>– Use one or more I2C repeater/redriver circuits like e.g. <a href="http://www.digikey.com/product-detail/en/nxp-semiconductors/PCA9617ADPJ/568-10211-1-ND/3991867" rel="nofollow ugc">http://www.digikey.com/product-detail/en/nxp-semiconductors/PCA9617ADPJ/568-10211-1-ND/3991867</a> to extend the range.</p>
+<p>– Use the slowest I2C speed possible (100 kbps instead of 400 kbps).</p>
+<p>– With 100 m of cable you might even have resistive drop in the cable that reduces your swing too much. Again look at the signals with an oscilloscope (at both ends of the cable). A redriver might be of help also if this is the case.</p>
+<p>– Consider using a protocol that is more suitable for 100 m distances, like RS422 or RS485. If you need to use the same I2C slaves you will probably need a microcontroller on each end of the cable to translate between RS422/485 and I2C. The software of your existing controller probably needs to change to accommodate the changes.</p>
+<p>Good luck!</p>
+<p>Per</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=1583#respond" data-commentid="1583" data-postid="774" data-belowelement="div-comment-1583" data-respondelement="respond" data-replyto="Reply to Per Magnusson" aria-label="Trả lời Per Magnusson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-1969" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-1969" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/958f29174dc8f37996cd2ccbee0566ee.png" srcset="https://secure.gravatar.com/avatar/958f29174dc8f37996cd2ccbee0566ee?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Anders Johansson</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-1969"><time datetime="2017-11-21T07:18:00+01:00">2017-11-21 at 07:18</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I2C is not intended to be used with cables.<br>
+As the name implies it is used for Inter Ic Communication on PCB’s.<br>
+Anders J</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=1969#respond" data-commentid="1969" data-postid="774" data-belowelement="div-comment-1969" data-respondelement="respond" data-replyto="Reply to Anders Johansson" aria-label="Trả lời Anders Johansson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-1970" class="comment byuser comment-author-per-magnusson bypostauthor even thread-odd thread-alt depth-1">
+			<article id="div-comment-1970" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/d552bed30bd0159a254b0b1325f044c5.png" srcset="https://secure.gravatar.com/avatar/d552bed30bd0159a254b0b1325f044c5?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Per Magnusson</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-1970"><time datetime="2017-11-21T20:37:43+01:00">2017-11-21 at 20:37</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Sure, but it is often quite convenient to be able to use it in cables as well and as I showed in the blog post, this is quite possible if one is careful to minimize capacitive crosstalk to the I2C signals.</p>
+<p>In fact, I2C is often a very good candidate to be used over (not too long) cables e.g. when interfacing to sensors or slow peripherals and one wants to minimize the number of wires in the cable and/or the complexity of the system. But it does indeed require a good understanding of capacitive crosstalk (or sheer luck) when planning which wires in a cable to allocate for different signals.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=1970#respond" data-commentid="1970" data-postid="774" data-belowelement="div-comment-1970" data-respondelement="respond" data-replyto="Reply to Per Magnusson" aria-label="Trả lời Per Magnusson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-16779" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-16779" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/fdd41159e86ae07dee3d0b7799b62dc0.png" srcset="https://secure.gravatar.com/avatar/fdd41159e86ae07dee3d0b7799b62dc0?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Dan Marquez</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-16779"><time datetime="2019-03-29T21:44:41+01:00">2019-03-29 at 21:44</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Per,</p>
+<p>This is brilliant and looks exactly like the waveforms I am seeing as I try to troubleshoot a system I am working on for a customer. However, I have taken the cable out of the equation and cut the traces on the board and rerouted using wires so I could keep SDA and SCL away from each other but I can’t seem to get rid of the cross talk. Any suggestions?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=16779#respond" data-commentid="16779" data-postid="774" data-belowelement="div-comment-16779" data-respondelement="respond" data-replyto="Reply to Dan Marquez" aria-label="Trả lời Dan Marquez">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-23644" class="comment even depth-2 parent">
+			<article id="div-comment-23644" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/caa952dccc8e87102439166c639467c5.png" srcset="https://secure.gravatar.com/avatar/caa952dccc8e87102439166c639467c5?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Charlie</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-23644"><time datetime="2020-02-28T14:04:40+01:00">2020-02-28 at 14:04</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You don’t need to worry about this. Article is totally misleading. For i2c only care about data voltage level at clock rising edge when data is sampled. Otherwise do not care unless they violated Vil min or Vih max which is said to degrade the lifetime of the parts.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=23644#respond" data-commentid="23644" data-postid="774" data-belowelement="div-comment-23644" data-respondelement="respond" data-replyto="Reply to Charlie" aria-label="trả lời Charlie">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-23645" class="comment byuser comment-author-per-magnusson bypostauthor odd alt depth-3">
+			<article id="div-comment-23645" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/d552bed30bd0159a254b0b1325f044c5.png" srcset="https://secure.gravatar.com/avatar/d552bed30bd0159a254b0b1325f044c5?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Per Magnusson</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-23645"><time datetime="2020-02-28T16:36:28+01:00">2020-02-28 at 16:36</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Charlie,</p>
+<p>Thanks for your kind and insightful refutation of the article. Unfortunately you are wrong. </p>
+<p>First of all, the bus failed to work with the amount of crosstalk shown in the first plot and did work fine after rearranging the wires to reduce crosstalk. This shows that this kind of crosstalk can be important in practice.</p>
+<p>Second of all, section 3.1.3 of the specification (as linked to in the article) says this:</p>
+<p>“The data on the SDA line must be stable during the HIGH period of the clock. The HIGH or LOW state of the data line can only change when the clock signal on the SCL line is LOW (see Figure 4).”</p>
+<p>This is violated if SDA changes due to crosstalk at the same time the clock goes low.</p>
+<p>So both in practice and according to the standard this kind of crosstalk can be bad.</p>
+<p>Regarding exceeding Vih_max and going below Vil_min, this is usually not a problem on most logic inputs if the current is sufficiently limited. The voltage will be limited by ESD diodes clamping the level to a diode drop above Vdd or below Vss. Such diodes usually can take at least a few tens of mA on modern CMOS chips without problem. If you inject too much current however, a parasitic thyristor in the device may turn on and short the supplies, which is typically a very bad thing. This is called latch-up. See, e.g. <a href="https://en.wikipedia.org/wiki/Latch-up" rel="nofollow ugc">https://en.wikipedia.org/wiki/Latch-up</a></p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=23645#respond" data-commentid="23645" data-postid="774" data-belowelement="div-comment-23645" data-respondelement="respond" data-replyto="Reply to Per Magnusson" aria-label="Trả lời Per Magnusson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-16785" class="comment byuser comment-author-per-magnusson bypostauthor even thread-odd thread-alt depth-1">
+			<article id="div-comment-16785" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/d552bed30bd0159a254b0b1325f044c5.png" srcset="https://secure.gravatar.com/avatar/d552bed30bd0159a254b0b1325f044c5?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Per Magnusson</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-16785"><time datetime="2019-03-29T22:28:20+01:00">2019-03-29 at 22:28</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Dan,</p>
+<p>Are the disturbances occurring when and only when the other I2C signal goes low? Or do they (also?) happen at other times? If so, there seems to be other signals that disturb I2C and just separating SDA and SCL from each other does not help unless it also separates them from the other aggressor.</p>
+<p>Does it help if you twist a GND wire together with each of SDA and SCL? If you ground such a “guard” or shield wire both near the beginning and end of the signal wire it should be pretty effective both against any capacitive as well as inductive crosstalk. If you ground it only at one end, it is ineffective against inductive crosstalk, but still effective against capacitive crosstalk.</p>
+<p>How do you probe the signals? If you use a standard 10x passive oscilloscope probe with a pigtail GND clip you might be picking up disturbances with the loop area formed by the pigtail, probe tip and the PCB between the ground clip and the probe tip. Even worse is if you do not have the ground clip of each used probe attached to a good ground point near the probe’s tip. You can see if this noise pickup is a problem by reducing the loop area by bringing the pigtail wire closer to the probe tip and PCB. If the interference shown on the scope is reduced by this, the scope is picking up noise that is not really present on the signal you are trying to measure. A way to very effectively reduce the loop area is to solder an uninsulated wire to a GND point near where you want to probe, pull off the hook of the probe to expose the shield of the probe near the tip and wrap the grounded uninsulated wire around the shield. This should reduce the loop area and pickup by one or two orders of magnitude.</p>
+<p>Let me know if you solve this conundrum.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=16785#respond" data-commentid="16785" data-postid="774" data-belowelement="div-comment-16785" data-respondelement="respond" data-replyto="Reply to Per Magnusson" aria-label="Trả lời Per Magnusson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-19297" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-19297" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/356f2b57daa0dc41f5614cde7b0966bd.png" srcset="https://secure.gravatar.com/avatar/356f2b57daa0dc41f5614cde7b0966bd?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Pit</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-19297"><time datetime="2019-04-24T16:54:04+01:00">2019-04-24 at 16:54</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Great article, many thanks!<br>
+I have one question for you: when the I2C lines are low, the noise produced on the lines seems lower. You argue that this is because of the lower resistance to GND while they are driven low. However, the amplitude of the noise spike should be the same, as it does not depend on the resistance, only on the capacitive coupling. Is the recovery so fast that it is less visible?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=19297#respond" data-commentid="19297" data-postid="774" data-belowelement="div-comment-19297" data-respondelement="respond" data-replyto="Reply to Pit" aria-label="Trả lời hố">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-19299" class="comment byuser comment-author-per-magnusson bypostauthor even thread-odd thread-alt depth-1">
+			<article id="div-comment-19299" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/d552bed30bd0159a254b0b1325f044c5.png" srcset="https://secure.gravatar.com/avatar/d552bed30bd0159a254b0b1325f044c5?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Per Magnusson</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-19299"><time datetime="2019-04-24T20:46:47+01:00">2019-04-24 at 20:46</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Pit,</p>
+<p>Good question. It is a simplification to say that the resistance does not matter. If the resistance is low enough, it starts to have an effect since the current injected by a capacitor is limited by the capacitance times the rate of change of voltage (volts per second). The disturbance is then the resistance to ground times this injected current through the capacitor.  When the resistance is reasonably high (perhaps on the order of several hundred ohms or more in this case), the actual value of the resistance does not matter for the initial noise amplitude as it is dwarfed by the surrounding stray capacitances if you have a decent length of cable.  However, if the resistance is low enough (like it typically is with a fully turned on transistor to GND, maybe ~10-30 ohms) or the capacitances are small enough (like it is if there is no cable and very little other capacitive coupling), the resistances wins out over the capacitances.</p>
+<p>It is just if you have a decent amount of unfortunate stray capacitance (like with a long enough improperly wired cable) and resistances with values that are realistic for pull-up resistors that the actual value of the resistance has negligible effect on the initial noise spike amplitude.</p>
+<p>Per</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=19299#respond" data-commentid="19299" data-postid="774" data-belowelement="div-comment-19299" data-respondelement="respond" data-replyto="Reply to Per Magnusson" aria-label="Trả lời Per Magnusson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-31258" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-31258" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/1da162bb83cbe65ec027aa8e25a7eef2.png" srcset="https://secure.gravatar.com/avatar/1da162bb83cbe65ec027aa8e25a7eef2?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">caunegre</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-31258"><time datetime="2021-05-16T11:12:37+01:00">2021-05-16 at 11:12</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks, the article helps indeed !<br>
+I was facing this issue with long cables in a project and after reducing the bus frequency I realized that the problem was crosstalk.<br>
+Unfortunately I have no margin with the cable, so I need to think a different bus protocol…</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=31258#respond" data-commentid="31258" data-postid="774" data-belowelement="div-comment-31258" data-respondelement="respond" data-replyto="Reply to caunegre" aria-label="Trả lời caunegre">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-40766" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-40766" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/00358619218d71abf3eaf824a0e380bc.png" srcset="https://secure.gravatar.com/avatar/00358619218d71abf3eaf824a0e380bc?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Evert-Jan Pol</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-40766"><time datetime="2022-07-29T11:24:11+01:00">2022-07-29 at 11:24</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Per,</p>
+<p>By chance I stumbled on this article in trying to find supporting material for a customer question. The question was why the I2C specification lists minimum fall times for the edges on the serial lines for fast modes and up. The question is answered in a number of places on the web, and the consensus seems that it is to limit interference generated by exceedingly short fall times on the bus. Your article adds crosstalk between SDA and SCL to the picture, so thanks for that insight.</p>
+<p>The main question that I have after reading your article, is if the waveforms that you show are within spec on the fall time, for the fast modes and up? (I guess the absence of such a minimum time for the standard mode is for backwards-compatibility reasons.)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=40766#respond" data-commentid="40766" data-postid="774" data-belowelement="div-comment-40766" data-respondelement="respond" data-replyto="Reply to Evert-Jan Pol" aria-label="Trả lời Evert-Jan Pol">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		<li id="comment-40790" class="comment byuser comment-author-per-magnusson bypostauthor odd alt thread-even depth-1">
+			<article id="div-comment-40790" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/d552bed30bd0159a254b0b1325f044c5.png" srcset="https://secure.gravatar.com/avatar/d552bed30bd0159a254b0b1325f044c5?s=148&amp;d=mm&amp;r=pg 2x" class="avatar avatar-74 photo" height="74" width="74" loading="lazy" decoding="async">						<b class="fn">Per Magnusson</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#comment-40790"><time datetime="2022-07-30T17:32:20+01:00">2022-07-30 at 17:32</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Evert-Jan,</p>
+<p>I have not checked whether the fall-time of the circuit in the article meet the spec.</p>
+<p>In general, it is good for both signal integrity and EMC to not have faster edges than necessary as crosstalk, reflections and EMI are all reduced with lower edge rates. With today’s shrinking transistor geometries, it is very easy to generate very fast edges (way shorter than a nanosecond), so I think it is a good thing that the I2C spec puts a limit to the edge rate. This should reduce the number of chip manufacturers who accidentally make unnecessarily fast I2C outputs which could otherwise cause trouble in many designs.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/?replytocom=40790#respond" data-commentid="40790" data-postid="774" data-belowelement="div-comment-40790" data-respondelement="respond" data-replyto="Reply to Per Magnusson" aria-label="Trả lời Per Magnusson">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+		
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://axotron.se/blog/crosstalk-problems-when-running-i2c-signals-in-a-cable/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://axotron.se/blog/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate=""><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required=""></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required=""></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required=""></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url"></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="774" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="8fc289b69b"></p><p style="display: none !important;"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="1686554026315"><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	<p class="akismet_comment_form_privacy_notice">This site uses Akismet to reduce spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.</p>
+</div><!-- #comments -->
+
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+	<div id="tertiary" class="sidebar-container" role="complementary">
+		<div class="sidebar-inner">
+			<div class="widget-area">
+				
+		<aside id="recent-posts-2" class="widget widget_recent_entries">
+		<h3 class="widget-title">Recent Posts</h3>
+		<ul>
+											<li>
+					<a href="https://axotron.se/blog/2-m-fox-hunting-antenna/">2 m Fox Hunting Antenna</a>
+									</li>
+											<li>
+					<a href="https://axotron.se/blog/foxscope-radiopejlmottagare-med-dubbla-mottagarkedjor-del-2/">FoxScope – radiopejlmottagare med dubbla mottagarkedjor – del 2</a>
+									</li>
+											<li>
+					<a href="https://axotron.se/blog/foxscope-radiopejlmottagare-med-dubbla-mottagarkedjor/">FoxScope – radiopejlmottagare med dubbla mottagarkedjor – del 1</a>
+									</li>
+											<li>
+					<a href="https://axotron.se/blog/microscope-adapter-for-mobile-phone-camera/">Microscope adapter for mobile phone camera</a>
+									</li>
+											<li>
+					<a href="https://axotron.se/blog/montering-av-vaxthus/">Montering av växthus</a>
+									</li>
+					</ul>
+
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h3 class="widget-title">Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Per Magnusson</span> on <a href="https://axotron.se/blog/voltage-and-current-noise-sources-in-ltspice-noise-simulations/#comment-43333">Voltage and Current Noise Sources in LTspice .noise Simulations</a></li><li class="recentcomments"><span class="comment-author-link">Jesper</span> on <a href="https://axotron.se/blog/voltage-and-current-noise-sources-in-ltspice-noise-simulations/#comment-43328">Voltage and Current Noise Sources in LTspice .noise Simulations</a></li><li class="recentcomments"><span class="comment-author-link">Artie</span> on <a href="https://axotron.se/blog/making-vlc-automatically-reload-the-favorite-playlist/#comment-42693">Making VLC automatically reload the favorite playlist</a></li><li class="recentcomments"><span class="comment-author-link">Thomas Dyball</span> on <a href="https://axotron.se/blog/making-vlc-automatically-reload-the-favorite-playlist/#comment-42349">Making VLC automatically reload the favorite playlist</a></li><li class="recentcomments"><span class="comment-author-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">shubi</font></font></span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> on </font></font><a href="https://axotron.se/blog/making-vlc-automatically-reload-the-favorite-playlist/#comment-41749"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tạo VLC tự động tải lại danh sách phát yêu thích</font></font></a></li></ul></aside><aside id="categories-2" class="widget widget_categories"><h3 class="widget-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Thể loại</font></font></h3>
+			<ul>
+					<li class="cat-item cat-item-10"><a href="https://axotron.se/blog/category/arduino/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Arduino</font></font></a>
+</li>
+	<li class="cat-item cat-item-19"><a href="https://axotron.se/blog/category/cnc/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">CNC</font></font></a>
+</li>
+	<li class="cat-item cat-item-2"><a href="https://axotron.se/blog/category/electronics/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Thiết bị điện tử</font></font></a>
+</li>
+	<li class="cat-item cat-item-16"><a href="https://axotron.se/blog/category/orienteering/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">định hướng</font></font></a>
+</li>
+	<li class="cat-item cat-item-12"><a href="https://axotron.se/blog/category/pc/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">máy tính</font></font></a>
+</li>
+	<li class="cat-item cat-item-11"><a href="https://axotron.se/blog/category/photography/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nhiếp ảnh</font></font></a>
+</li>
+	<li class="cat-item cat-item-14"><a href="https://axotron.se/blog/category/skepticism/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">chủ nghĩa hoài nghi</font></font></a>
+</li>
+	<li class="cat-item cat-item-13"><a href="https://axotron.se/blog/category/swedish/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Thụy Điển</font></font></a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://axotron.se/blog/category/uncategorized/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Chưa được phân loại</font></font></a>
+</li>
+	<li class="cat-item cat-item-15"><a href="https://axotron.se/blog/category/woodworking/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">chế biến gỗ</font></font></a>
+</li>
+			</ul>
+
+			</aside><aside id="meta-2" class="widget widget_meta"><h3 class="widget-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">meta</font></font></h3>
+		<ul>
+						<li><a href="https://axotron.se/blog/wp-login.php"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Đăng nhập</font></font></a></li>
+			<li><a href="https://axotron.se/blog/feed/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">nguồn cấp dữ liệu</font></font></a></li>
+			<li><a href="https://axotron.se/blog/comments/feed/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">nguồn cấp dữ liệu nhận xét</font></font></a></li>
+
+			<li><a href="https://wordpress.org/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">WordPress.org</font></font></a></li>
+		</ul>
+
+		</aside><aside id="archives-3" class="widget widget_archive"><h3 class="widget-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">lưu trữ</font></font></h3>
+			<ul>
+					<li><a href="https://axotron.se/blog/2023/02/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 2 năm 2023</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2022/11/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 11 năm 2022</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2022/10/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 10 năm 2022</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2022/09/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 9 năm 2022</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2021/07/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 7 năm 2021</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2021/06/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 6 năm 2021</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2021/03/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 3 năm 2021</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2021/01/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tháng Giêng 2021</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2020/12/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 12 năm 2020</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2020/02/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 2 năm 2020</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2019/10/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 10 năm 2019</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2018/11/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 11 năm 2018</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2018/09/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 9 năm 2018</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2017/09/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 9 năm 2017</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2017/06/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 6 năm 2017</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2017/05/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 5 năm 2017</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2017/04/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 4 năm 2017</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2017/03/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 3 năm 2017</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2017/02/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 2 năm 2017</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2017/01/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 1 năm 2017</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/12/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 12 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/11/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 11 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/10/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 10 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/09/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 9 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/08/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 8 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/07/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 7 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/06/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 6 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/05/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 5 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/04/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 4 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/03/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 3 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/02/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 2 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2016/01/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 1 năm 2016</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/12/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 12 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/11/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 11 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/09/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 9 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/08/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 8 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/07/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 7 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/06/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 6 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/05/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 5 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/04/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 4 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/03/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 3 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/02/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 2 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2015/01/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 1 năm 2015</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/12/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 12 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/11/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 11 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/10/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 10 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/09/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 9 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/08/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 8 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/07/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 7 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/06/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 6 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/05/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 5 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/04/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 4 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/03/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">tháng 3 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2014/01/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tháng 1 năm 2014</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2013/12/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tháng 12 năm 2013</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2013/11/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tháng 11 năm 2013</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2013/10/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tháng 10 năm 2013</font></font></a></li>
+	<li><a href="https://axotron.se/blog/2013/09/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tháng 9 năm 2013</font></font></a></li>
+			</ul>
+
+			</aside>			</div><!-- .widget-area -->
+		</div><!-- .sidebar-inner -->
+	</div><!-- #tertiary -->
+
+		</div><!-- #main -->
+		<footer id="colophon" class="site-footer" role="contentinfo">
+				<div id="secondary" class="sidebar-container" role="complementary">
+		<div class="widget-area masonry" style="position: relative; height: 94.8px;">
+			<aside id="search-2" class="widget widget_search masonry-brick" style="position: absolute; left: 0px; top: 0px;"><form role="search" method="get" class="search-form" action="https://axotron.se/blog/">
+				<label>
+					<span class="screen-reader-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tìm kiếm:</font></font></span>
+					<input type="search" class="search-field" placeholder="Tìm kiếm …" value="" name="s">
+				</label>
+				<input type="submit" class="search-submit" value="Search">
+			</form></aside>		</div><!-- .widget-area -->
+	</div><!-- #secondary -->
+
+			<div class="site-info">
+												<a href="https://wordpress.org/" class="imprint"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+					Tự hào được cung cấp bởi WordPress				</font></font></a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	<script id="collapseomatic-js-js-before">
+const com_options = {"colomatduration":"fast","colomatslideEffect":"slideFade","colomatpauseInit":"","colomattouchstart":""}
+</script>
+<script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/collapse.js.tải xuống" id="collapseomatic-js-js"></script>
+<script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/comment-reply.min.js.tải xuống" id="comment-reply-js"></script>
+<script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/imagesloaded.min.js.tải xuống" id="imagesloaded-js"></script>
+<script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/masonry.min.js.tải xuống" id="masonry-js"></script>
+<script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/jquery.masonry.min.js.tải xuống" id="jquery-masonry-js"></script>
+<script src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/functions.js.tải xuống" id="twentythirteen-script-js"></script>
+<script defer="" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/akismet-frontend.js.tải xuống" id="akismet-frontend-js"></script><div id="goog-gt-tt" class="VIpgJd-yAWNEb-L7lbkb skiptranslate" style="border-radius: 12px; margin: 0 0 0 -23px; padding: 0; font-family: &#39;Google Sans&#39;, Arial, sans-serif;" data-id=""><div id="goog-gt-vt" class="VIpgJd-yAWNEb-hvhgNd"><div class=" VIpgJd-yAWNEb-hvhgNd-l4eHX-i3jM8c"><img src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/24px.svg" width="24" height="24" alt=""></div><div class=" VIpgJd-yAWNEb-hvhgNd-k77Iif-i3jM8c"><div class="VIpgJd-yAWNEb-hvhgNd-IuizWc" dir="ltr">Văn bản gốc</div><div id="goog-gt-original-text" class="VIpgJd-yAWNEb-nVMfcd-fmcmS VIpgJd-yAWNEb-hvhgNd-axAV1"></div></div><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid ltr"><div class="VIpgJd-yAWNEb-hvhgNd-N7Eqid-B7I4Od ltr" dir="ltr"><div class="VIpgJd-yAWNEb-hvhgNd-UTujCb">Đánh giá bản dịch này</div><div class="VIpgJd-yAWNEb-hvhgNd-eO9mKe">Ý kiến phản hồi của bạn sẽ được dùng để góp phần cải thiện Google Dịch</div></div><div class="VIpgJd-yAWNEb-hvhgNd-xgov5 ltr"><button id="goog-gt-thumbUpButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Bản dịch tốt" aria-label="Bản dịch tốt" aria-pressed="false"><span id="goog-gt-thumbUpIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7H2v13h16c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM7 18H4V9h3v9zm14-7l-3 7H9V8l4.34-4.34L12 9h9v2z"></path></svg></span><span id="goog-gt-thumbUpIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M21 7h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 0S7.08 6.85 7 7v13h11c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73V9c0-1.1-.9-2-2-2zM5 7H1v13h4V7z"></path></svg></span></button><button id="goog-gt-thumbDownButton" type="button" class="VIpgJd-yAWNEb-hvhgNd-bgm6sf" title="Bản dịch kém" aria-label="Bản dịch kém" aria-pressed="false"><span id="goog-gt-thumbDownIcon"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7h5V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zM17 6h3v9h-3V6zM3 13l3-7h9v10l-4.34 4.34L12 15H3v-2z"></path></svg></span><span id="goog-gt-thumbDownIconFilled"><svg width="24" height="24" viewBox="0 0 24 24" focusable="false" class="VIpgJd-yAWNEb-hvhgNd-THI6Vb NMm5M"><path d="M3 17h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 24s7.09-6.85 7.17-7V4H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2zm16 0h4V4h-4v13z"></path></svg></span></button></div></div><div id="goog-gt-votingHiddenPane" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><form id="goog-gt-votingForm" action="https://translate.googleapis.com/translate_voting?client=te_lib" method="post" target="votingFrame" class="VIpgJd-yAWNEb-hvhgNd-aXYTce"><input type="text" name="sl" id="goog-gt-votingInputSrcLang"><input type="text" name="tl" id="goog-gt-votingInputTrgLang"><input type="text" name="query" id="goog-gt-votingInputSrcText"><input type="text" name="gtrans" id="goog-gt-votingInputTrgText"><input type="text" name="vote" id="goog-gt-votingInputVote"></form><iframe name="votingFrame" frameborder="0" src="./Vấn đề nhiễu xuyên âm khi chạy tín hiệu I2C trong cáp _ Blog Axotron_files/saved_resource.html"></iframe></div></div></div>
+
+
+</body><div style="position: absolute; top: 0px; display: block !important;"><template shadowrootmode="open"><style>@import "chrome-extension://jdfkmiabjpfjacifcmihfdjhpnjpiick/css/content-script.css";
+</style><div class="body"><div class="turn-lights-overlay"></div></div></template></div></html>

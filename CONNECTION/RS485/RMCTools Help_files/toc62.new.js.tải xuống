@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Line Drivers: RS-232/485","url":"Communications/Serial/Configuration_and_Wiring/Serial_Line_Drivers_RS-232_485.htm"},{"type":"item","name":"Configuring Serial Communications","url":"Communications/Serial/Configuration_and_Wiring/Serial_Configuration.htm"},{"type":"item","name":"Serial Network Topologies","url":"Communications/Serial/Configuration_and_Wiring/Serial_Network_Topologies.htm"},{"type":"item","name":"RS-232 Wiring for the RMC75S","url":"Communications/Serial/Configuration_and_Wiring/RS-232_Wiring_for_the_RMC70.htm"},{"type":"item","name":"RS-485 Wiring for the RMC75S","url":"Communications/Serial/Configuration_and_Wiring/RS-485_Wiring_for_the_RMC75S.htm"},{"type":"item","name":"RS-485 Termination and Biasing","url":"Communications/Serial/Configuration_and_Wiring/RS-485_Termination_and_Biasing.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

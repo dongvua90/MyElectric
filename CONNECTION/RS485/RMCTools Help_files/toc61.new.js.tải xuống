@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Serial Overview","url":"Communications/Serial/Serial_Overview.htm"},{"type":"item","name":"Using Serial Communications","url":"Communications/Serial/Serial_Communications_Using.htm"},{"type":"book","name":"Configuration and Wiring","key":"toc62"},{"type":"book","name":"RMC75S Serial Protocols","key":"toc63"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

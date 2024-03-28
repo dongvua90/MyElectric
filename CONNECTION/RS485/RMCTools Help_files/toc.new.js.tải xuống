@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"book","name":"Introducing the RMC Family","key":"toc1"},{"type":"book","name":"Starting Up the RMC","key":"toc2"},{"type":"book","name":"Controller Features","key":"toc5"},{"type":"book","name":"Using RMCTools","key":"toc22"},{"type":"book","name":"Programming","key":"toc39"},{"type":"book","name":"Communication","key":"toc49"},{"type":"book","name":"Hardware","key":"toc66"},{"type":"book","name":"Command Reference","key":"toc87"},{"type":"book","name":"Register Reference","key":"toc107"},{"type":"book","name":"Wiring and Installation","key":"toc141"},{"type":"book","name":"Troubleshooting","key":"toc145"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

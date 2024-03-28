@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<!-- saved from url=(0130)https://deltamotion.com/support/webhelp/rmctools/Communications/Serial/Configuration_and_Wiring/RS-485_Termination_and_Biasing.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.rh-hide:not(.rh-animate){display:none !important;}</style>
+
+<meta name="topic-comment" content="">
+<meta name="generator" content="Adobe RoboHelp 2019">
+<title>RS-485 Termination and Biasing</title>
+<link rel="StyleSheet" href="./default.css" type="text/css">
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+var showAllFlag = 1;
+
+function swapShowHide() { 
+
+        if (showAllFlag == 1){
+                imageShowAll.src = "../../../HideAll.gif";
+                showAllFlag = 0;
+                JavaScript:showEm()
+        }else{
+                imageShowAll.src = "../../../ShowAll.gif";
+                showAllFlag = 1;
+                JavaScript:hideEm()
+        }
+}
+//]]>
+</script>
+<script type="text/javascript" language="JavaScript1.2">
+//<![CDATA[
+var arrayofDivs = document.getElementsByTagName("DIV");
+function showEm() { for (x=0;x<arrayofDivs.length;x++) { arrayofDivs[x].style.display = ""; }
+}
+function hideEm() { for (x=0;x<arrayofDivs.length;x++) { arrayofDivs[x].style.display = "none"; }
+}
+//]]>
+</script>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="./rh.min.js.tải xuống"></script>
+<script type="text/javascript" src="./common.min.js.tải xuống"></script>
+<script type="text/javascript" src="./topic.min.js.tải xuống"></script>
+<script type="text/javascript" src="./constants.js.tải xuống"></script>
+<script type="text/javascript" src="./utils.js.tải xuống"></script>
+<script type="text/javascript" src="./mhutils.js.tải xuống"></script>
+<script type="text/javascript" src="./mhlang.js.tải xuống"></script>
+<script type="text/javascript" src="./mhver.js.tải xuống"></script>
+<script type="text/javascript" src="./settings.js.tải xuống"></script>
+<script type="text/javascript" src="./XmlJsReader.js.tải xuống"></script>
+<script type="text/javascript" src="./loadparentdata.js.tải xuống"></script>
+<script type="text/javascript" src="./loadscreen.js.tải xuống"></script>
+<script type="text/javascript" src="./loadprojdata.js.tải xuống"></script>
+<script type="text/javascript" src="./mhtopic.js.tải xuống"></script>
+ <link rel="stylesheet" type="text/css" href="./widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="./topic.min.css">
+<script type="text/javascript">
+gRootRelPath = "../../..";
+gCommonRootRelPath = "../../..";
+gTopicId = "6.3.1.0_6";
+</script>
+ <meta name="topic-breadcrumbs" content="Communication &gt; Serial (RS-232/485) (RMC70) &gt; Configuration and Wiring">
+<script type="text/javascript" charset="utf-8" src="./screendata.js.tải xuống"></script><script type="text/javascript" charset="utf-8" src="./parentdata.js.tải xuống"></script></head>
+<body>
+<script type="text/javascript" src="./ehlpdhtm.js.tải xuống"></script>
+
+
+<h1>RS-485 Termination and Biasing</h1>
+<p class="NormalWithSpacing">Termination and Biasing are concepts that only apply to differential wiring. As such, they only apply to RS-485 and not RS-232.</p>
+<p class="Note" style="margin-left: 0px;"><span style="font-weight: bold;">Note:</span><br>
+Delta recommends you always use biasing on a RS-485 network. To determine whether you need termination, read the <span style="font-weight: bold;">Termination Concept</span> section in this topic.</p>
+<p class="TopicHead2">Selecting Termination and Biasing on the RMC75</p>
+<p class="DescriptionBody">The RMC7xS termination and biasing can be independently selected with jumpers on the 8-pin RS-485 connector. The locations where the jumpers should be installed are marked on the label.</p>
+<p class="DescriptionBody" style="font-weight: bold;">To select termination: <span style="font-weight: normal;">Insert a jumper between pins</span> +T/R <span style="font-weight: normal;">and</span> Trm Jpr<span style="font-weight: normal;">.</span></p>
+<p class="DescriptionBody" style="font-weight: bold;">To select biasing: <span style="font-weight: normal;">Insert a jumper between pins</span> SCmn <span style="font-weight: normal;">and</span> Bias Jumper<span style="font-weight: normal;">.</span></p>
+<p class="TopicHead2">The Termination Concept</p>
+<p class="DescriptionBody">Cable termination is a way of absorbing transmitted energy at the end of a network. This prevents signal reflections from bouncing back towards the transmitter and potentially upsetting signal quality and communications.</p>
+<p class="DescriptionBody">The termination resistor should match the characteristic impedance of the cable being terminated. &nbsp;The effective impedance of the RMC7<span style="font-style: italic;">x</span>S's termination resistor and biasing resistors is 114<span style="font-family: Symbol, serif;">W</span>. Therefore, cabling with impedance of 100<span style="font-family: Symbol, serif;">W</span> to 120<span style="font-family: Symbol, serif;">W</span> is recommended.</p>
+<p class="DescriptionBody">Termination should be placed at the end of the network for each wire pair. &nbsp;For RS-485 (2-wire, point-to-point or multi-drop), terminate the wire pair at each end of the network. The diagram in <a href="https://deltamotion.com/support/webhelp/rmctools/Communications/Serial/Configuration_and_Wiring/Serial_Network_Topologies.htm">Serial Network Topologies</a> shows the correct location of the termination.</p>
+<p class="TopicHead3">Termination and Cable Length</p>
+<p class="DescriptionBody">Termination is not required on all differential networks, but it does typically extend the maximum cable length. The following chart shows the maximum cable lengths at various baud rates with and without termination:</p>
+<p class="Note"><span style="font-weight: bold;">NOTE:</span><br>
+The maximum cable length is the length of the entire network and not just the distance between nodes on the network.</p>
+<p class="TopicHead3">Termination vs. Cable Length:</p>
+<table style="vertical-align: top; margin-left: 40px;" cellspacing="0">
+<colgroup><col>
+<col>
+<col>
+<col>
+</colgroup><tbody><tr style="vertical-align: top;">
+<td style="border: Solid 1px #000000; padding-right: 10px; padding-left: 10px; vertical-align: bottom;" bgcolor="#BFC9ED">
+<p style="font-weight: bold; text-align: center;">Baud Rate</p>
+</td>
+<td style="border-top: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px; vertical-align: bottom;" bgcolor="#BFC9ED">
+<p style="font-weight: bold; text-align: center;">Max Unterminated</p>
+<p style="font-weight: bold; text-align: center;">Cable Length (ft)</p>
+</td>
+<td style="border-top: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px; vertical-align: bottom;" bgcolor="#BFC9ED">
+<p style="font-weight: bold; text-align: center;">Termination</p>
+<p style="font-weight: bold; text-align: center;">Requirements</p>
+</td>
+<td style="border-top: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px; vertical-align: bottom;" bgcolor="#BFC9ED">
+<p style="font-weight: bold; text-align: center;">Max Terminated</p>
+<p style="font-weight: bold; text-align: center;">Cable Length (ft)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">115,200</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">475</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p>Required beyond 475 ft</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">3250</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">57,600</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">950</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p>Required beyond 950 ft</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">38,400</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">1900</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p>Required beyond 1900 ft</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">19,200</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">3750</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p>Required beyond 3750 ft</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">9,600</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">Not Required</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4,800</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">Not Required</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">2,400</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">Not Required</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;">
+<p style="text-align: center;">4000</p>
+</td>
+</tr>
+</tbody></table>
+<p class="TopicHead3">Cable Length Derivation</p>
+<p class="DescriptionBody">The values presented in the chart above are based on 24AWG cable with capacitance of 16 pF/ft and the following reasoning. Signals travel through a cable at approximately 66% of c or 0.66 ft/ns. It is assumed that a signal transition will dampen out after three round trips in the cable. This damping must occur before the bit is sampled or within half a bit time. One bit time is equal to the reciprocal of the baud rate.</p>
+<p class="TopicHead3">Example:</p>
+<p class="DescriptionBody" style="margin-left: 64px;">Compute the cable length for 115,200 baud RS422.</p>
+<p class="DescriptionBody" style="margin-left: 64px;">First, we compute a half bit time at this baud rate.</p>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<table style="vertical-align: top; margin-left: 80px;" cellspacing="0">
+<colgroup><col>
+<col>
+<col>
+</colgroup><tbody><tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">Half Bit Time</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>0.5 * 1 / 115200</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">&nbsp;</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>4,340 ns</p>
+</td>
+</tr>
+</tbody></table>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<p class="DescriptionBody" style="margin-left: 64px;">Next, we convert this time to the distance the signal would travel in this time, assuming a speed of 0.66 ft/ns as described above:</p>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<table style="vertical-align: top; margin-left: 80px;" cellspacing="0">
+<colgroup><col>
+<col>
+<col>
+</colgroup><tbody><tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">Distance</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>4,340 ns * 0.66 ft / ns</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">&nbsp;</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>2890 ft</p>
+</td>
+</tr>
+</tbody></table>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<p class="DescriptionBody" style="margin-left: 64px;">Since three round trips are required for the signal transition to dampen and each round trip is twice the length of the cable, the total distance in feet is divided by six to get the final unterminated cable length:</p>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<table style="vertical-align: top; margin-left: 80px;" cellspacing="0">
+<colgroup><col>
+<col>
+<col>
+</colgroup><tbody><tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p class="DescriptionBody">Length</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>2890 ft / 6</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">&nbsp;</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>482 ft</p>
+</td>
+</tr>
+</tbody></table>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<p class="DescriptionBody" style="margin-left: 64px;">This value is then rounded down to allow for inexact cable velocities and damping rates, giving us 475 ft.</p>
+<p class="TopicHead2">The Biasing Concept</p>
+<p class="DescriptionBody">RS-485 indicates a binary 1 when the A line is at least 200 mV negative with respect to B, and a binary 0 when A is at least 200 mV positive with respect to B. It is important that the lines always be in a known state, not only when being driven. Biasing forces the network into a known state when the lines are idle and therefore otherwise not driven.</p>
+<p class="DescriptionBody">A known state is forced by allowing current to flow across the termination resistor. Therefore, biasing is usually selected on the RMC that also has a termination. However, some masters only have termination, in which case the user may want to only select biasing on an RMC close to the master. The current will then flow across the master's termination resistor.</p>
+<p class="DescriptionBody">The RMC7<span style="font-style: italic;">x</span>S requires biasing in order to be in a known state when the lines are idle. The biasing forces a binary 1.</p>
+<p class="TopicHead3">Example:</p>
+<p class="DescriptionBody" style="margin-left: 64px;">This example assumes that there is a single master and two RMCs on the network. Compute the voltage across a 120<span style="font-family: Symbol, serif;">W</span> termination resistor when using 1150<span style="font-family: Symbol, serif;">W</span> biasing resistors.</p>
+<p class="DescriptionBody" style="margin-left: 64px;">First, we calculate how much DC resistance will be between the biasing resistors. Calculating the parallel resistance of all DC terminations and node input impedances does this. &nbsp;For a single master and two RMCs we have the following components:</p>
+<ul style="list-style: disc;">
+<li class="p-DescriptionBody">
+<p class="DescriptionBody" style="margin-left: 64px;">Master load: 1 unit load, which is defined as 12 k<span style="font-family: Symbol, serif;">W</span>.</p>
+</li>
+<li class="p-DescriptionBody">
+<p class="DescriptionBody" style="margin-left: 64px;">RMC loads: unit load each, which is 48 k<span style="font-family: Symbol, serif;">W</span>.</p>
+</li>
+<li class="p-DescriptionBody">
+<p class="DescriptionBody" style="margin-left: 64px;">Termination Resister in the RMC: 120<span style="font-family: Symbol, serif;">W</span></p>
+</li>
+</ul>
+<p class="DescriptionBody" style="margin-left: 64px;">Therefore, putting all of the resistances in parallel yields the following:</p>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<table style="vertical-align: top; margin-left: 80px;" cellspacing="0">
+<colgroup><col>
+<col>
+<col>
+</colgroup><tbody><tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p class="DescriptionBody" style="text-align: right; margin-left: 0px;">Termination Resistance</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>120<span style="font-family: Symbol, serif;">W</span> || 12k<span style="font-family: Symbol, serif;">W</span> || 48k<span style="font-family: Symbol, serif;">W</span> || 48k<span style="font-family: Symbol, serif;">W</span></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">&nbsp;</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>118<span style="font-family: Symbol, serif;">W</span></p>
+</td>
+</tr>
+</tbody></table>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<p class="DescriptionBody" style="margin-left: 64px;">Then, we calculate how much DC resistance the network has between power rails:</p>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<table style="vertical-align: top; margin-left: 80px;" cellspacing="0">
+<colgroup><col>
+<col>
+<col>
+</colgroup><tbody><tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p class="DescriptionBody" style="text-align: right; margin-left: 0px;">Total Resistance</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>1150<span style="font-family: Symbol, serif;">W</span> + 118<span style="font-family: Symbol, serif;">W</span> + 1150<span style="font-family: Symbol, serif;">W</span></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">&nbsp;</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>2418<span style="font-family: Symbol, serif;">W</span></p>
+</td>
+</tr>
+</tbody></table>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<p class="DescriptionBody" style="margin-left: 64px;">Next, we calculate how much current is flowing through this DC resistance:</p>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<table style="vertical-align: top; margin-left: 80px;" cellspacing="0">
+<colgroup><col>
+<col>
+<col>
+</colgroup><tbody><tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p class="DescriptionBody" style="text-align: right; margin-left: 0px;">Current</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>5VDC / 2418<span style="font-family: Symbol, serif;">W</span></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">&nbsp;</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>2.068mA</p>
+</td>
+</tr>
+</tbody></table>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<p class="DescriptionBody" style="margin-left: 64px;">Finally, we calculate the voltage drop across the termination resistor:</p>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<table style="vertical-align: top; margin-left: 80px;" cellspacing="0">
+<colgroup><col>
+<col>
+<col>
+</colgroup><tbody><tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p class="DescriptionBody" style="text-align: right; margin-left: 0px;">Voltage</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>2.068mA * 118<span style="font-family: Symbol, serif;">W</span></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px;">
+<p style="text-align: right;">&nbsp;</p>
+</td>
+<td style="padding-right: 0px; padding-left: 0px;">
+<p>=</p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>244mV</p>
+</td>
+</tr>
+</tbody></table>
+<p class="DescriptionBody" style="margin-left: 64px;">&nbsp;</p>
+<p class="DescriptionBody" style="margin-left: 64px;">This value is greater than the 200mV difference required by the TIA/EIA standards and constitutes a valid binary 0 state.</p>
+<p class="DescriptionBody">&nbsp;</p>
+
+<p class="NormalWithSpacing" style="font-weight: bold;">See Also</p>
+
+<p class="NormalWithSpacing"><a href="https://deltamotion.com/support/webhelp/rmctools/Communications/Serial/Serial_Overview.htm">Serial Overview</a></p>
+
+<hr style="margin-left: 25px;" width="90%" align="left">
+
+<p class="DescriptionBody"><script type="text/javascript" language="JavaScript1.2" style="x-condition: Online;">
+//<![CDATA[
+var sStart;
+var sMiddle;
+var sEnd;
+var sFilename;
+var sLocation;
+
+sStart = "<a href='mailto:helpfeedback@deltamotion.com?subject=RMCTools%20Help%20Feedback.%20Topic:%20";
+
+sLocation = window.location.href;
+
+if (sLocation.lastIndexOf("::") != -1) 
+{ 
+        sLocation = sLocation.substring(sLocation.lastIndexOf("::")+2); 
+} 
+
+sMiddle = sLocation;
+
+
+
+sEnd = "'> Send comments on this topic.<\/a>";
+
+document.write(sStart + sMiddle + sEnd);
+//]]>
+</script><a href="mailto:helpfeedback@deltamotion.com?subject=RMCTools%20Help%20Feedback.%20Topic:%20https://deltamotion.com/support/webhelp/rmctools/Communications/Serial/Configuration_and_Wiring/RS-485_Termination_and_Biasing.htm"> Send comments on this topic.</a></p>
+<div>
+<p class="DescriptionBody">Copyright 
+ (c) 2005-2021 by Delta Computer Systems, Inc.</p>
+</div>
+<div style="width: 100%; position: relative;" id="footer">
+</div>
+
+
+</body></html>

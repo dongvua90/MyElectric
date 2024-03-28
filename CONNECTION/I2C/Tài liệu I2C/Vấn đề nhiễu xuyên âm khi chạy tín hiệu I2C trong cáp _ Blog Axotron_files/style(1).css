@@ -1,0 +1,25 @@
+/*
+Theme Name: Twenty Thirteen Child
+Theme URI: http://axotron.se/blog
+Author: Per Magnsuson
+Author URI: http://axotron.se
+Template: twentythirteen
+Description: Changes the width of the blog posts.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: width
+Text Domain: twentythirteen-child
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+*/
+
+.entry-header,
+.entry-content,
+.entry-summary,
+.entry-meta {
+margin: 0 auto;
+max-width: 1004px;
+width: 100%;
+} 
