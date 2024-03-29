@@ -1,0 +1,2 @@
+Trong mạch khuếch đại phản hồi âm nếu ta sử dụng 1 tụ điện C mắc song song với điện trở hồi tiếp Rf thì nó sẽ có tác dụng chống nhiễu.
+nếu tín hiệu tần số cao đi qua tụ điện thì tụ C sẽ có trở kháng Zf giảm. từ đó độ lợi được tính bằng Rf/Rin sẽ giảm do Zf giảm. từ đó tín hiệu tần số cao sẽ không được khuếch đại lên. qua đó sẽ có tác dụng chống nhiễu.
